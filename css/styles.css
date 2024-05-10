@@ -12,20 +12,28 @@ body {
     .nav-item {
         margin-left: 6vw;
     }
+    .h1 {
+        font-size: 4rem;
+    }
+    .h2 {
+        font-size: 2rem;
+    }
 }
 @media (min-width: 769px) {
     .nav-item {
         margin-left: 2vw;
     }
+    .h1 {
+        font-size: 5rem;
+    }
+    .h2 {
+        font-size: 2.2rem;  
+    }
 }
 
 
 .h1 {
-    font-size: 5rem;
     color: #E5A76E;
-}
-.h2 {
-    font-size: 2.2rem;
 }
 
 .info {
