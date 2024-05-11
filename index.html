@@ -8,7 +8,7 @@
 </head>
 <body>
     
-    <nav class="navbar bg-body-tertiary p-1">
+    <nav class="navbar bg-body-tertiary p-1 fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand m-0 me-2" href="#">
                 <img src="img/logo.png" alt="logo" height="80px">
@@ -25,7 +25,6 @@
     </nav>
 
     <main class="container-fluid">
-        <section class="row">
             <!--<div class="col mt-5 pe-5">
                 <div class="d-flex justify-content-end">
                     <div class="text-start">
@@ -43,22 +42,51 @@
                 <img src="img/gotowanie.jpg" alt="banner" class="rounded-5 img-fluid">
             </div>
         </section>-->
-        <div class="ps-0 pt-5 my-5 text-center d-flex flex-column align-items-center">
-            <h1 class="h1 fw-bold">Największa</h1>
+        <div class="ps-0 pt-5 my-5 text-center d-flex flex-column align-items-center section">
+            <h1 class="h1 fw-bold pe-none">Największa</h1>
             <div class="col-lg-6 mx-auto">
-              <p class="h2 mb-4 pb-1">baza przepisów kulinarnych w Polsce</p>
+              <p class="h2 mb-4 pb-1 pe-none">baza przepisów kulinarnych w Polsce</p>
             </div>
             <div class="info h2 rounded-pill p-3 ps-4 d-flex d-inline align-items-center">
                 <div class="rounded-circle bg-light info-circle me-2"></div>
-                <p class="m-0 mb-1">9856 przepisów</p>
+                <p class="m-0 mb-1 pe-none">9856 przepisów</p>
             </div>
             <button class="btn btn-szukaj rounded-pill h2">Szukaj</button>
-            <div class="overflow-hidden" style="max-height: 30vh;">
+            <div class="overflow-hidden vanish" style="max-height: 35vh;">
               <div class="container px-5">
-                <img src="img/gotowanie.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="700" loading="lazy">
+                <img src="img/gotowanie.jpg" class="img-fluid rounded-4 mb-4" alt="Example image" width="700" height="700" loading="lazy">
               </div>
             </div>
-          </div>
+        </div>
+        <div class="ps-0 pt-5 my-5">
+            <h1 class="h1 fw-bold text-center">Dziesiątki <span>świetnych opini</span></h1>
+            <div class="container my-5 py-5 text-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-11 col-lg-9 col-xl-7">
+                        <div class="d-flex flex-start mb-4">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
+                            <div class="rounded-5 opinia">
+                                <div class="p-4">
+                                    <div class="text-start">
+                                        <h5 class="h5">Johny Cash</h5>
+                                        <p>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus ras purus odio, vestibulum in vulputate.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn info d-inline-flex align-items-center" type="button">
+                                    dupa
+                                <svg class="bi ms-1" width="20" height="20"><use xlink:href="#arrow-right-short"/></svg>
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 

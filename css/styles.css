@@ -1,5 +1,6 @@
 body {
     color: #333333;
+    padding-top: 5vw;
 }
 
 .navbar .container-fluid {
@@ -8,6 +9,19 @@ body {
 .nav-item {
     font-weight: 600;
 }
+
+@media (max-width: 576px) {
+    .text-center {
+      text-align: left !important; /* Zmiana na text-align-left */
+    }
+    .align-items-center {
+        align-items: start !important;
+    }
+    .vanish {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-item {
         margin-left: 6vw;
@@ -34,6 +48,10 @@ body {
 
 .h1 {
     color: #E5A76E;
+}
+
+span {
+    color: #333333;
 }
 
 .info {
@@ -65,4 +83,14 @@ body {
 
 .gotowanie img {
     width: 40vw;
+}
+
+
+.section {
+    padding-bottom: 10vw
+}
+
+.opinia {
+    background-color: #FBFBFB;
+    width: 60%;
 }
