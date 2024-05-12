@@ -121,3 +121,18 @@ span {
 .material-symbols-outlined {
     font-size: 40px !important;
 }
+
+
+
+.swiper {
+    width: 50vw;
+    height: 20vw
+}
+swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
