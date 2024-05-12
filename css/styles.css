@@ -10,6 +10,14 @@ body {
     font-weight: 600;
 }
 
+.flex-row-zmiana {
+    flex-direction: row;
+}
+
+.carousel {
+    max-width: 60%;
+}
+
 @media (max-width: 576px) {
     .text-center {
       text-align: left !important; /* Zmiana na text-align-left */
@@ -19,6 +27,9 @@ body {
     }
     .vanish {
         display: none;
+    }
+    .flex-row-zmiana {
+        flex-direction: column;
     }
 }
 
@@ -42,6 +53,14 @@ body {
     }
     .h2 {
         font-size: 2.2rem;  
+    }
+    .carousel-inner {
+        display: flex;
+    }
+    .carousel-item {
+        margin-right: 0;
+        flex: 0 0 50%;
+        display: block;
     }
 }
 
@@ -92,5 +111,13 @@ span {
 
 .opinia {
     background-color: #FBFBFB;
-    width: 60%;
+    max-width: 60%;
+}
+
+.next {
+    background-color: #FBFBFB;
+}
+
+.material-symbols-outlined {
+    font-size: 40px !important;
 }
