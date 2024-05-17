@@ -17,6 +17,9 @@ body {
 .carousel {
     max-width: 60%;
 }
+.text-center-nochange {
+    text-align: center !important;
+}
 
 @media (max-width: 576px) {
     .text-center {
@@ -109,7 +112,7 @@ span {
 
 
 .section {
-    padding-bottom: 8vw
+    padding-bottom: 6vw
 }
 
 .opinia {
@@ -134,3 +137,44 @@ span {
 .cien {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+
+.media svg {
+    height: 120px;
+}
+
+.media,
+.footer-media {
+    column-gap: 4.5vw;
+}
+
+.instagram-color {
+    color: #EC5075;
+}
+
+.email-color {
+    color: #E5A76E;
+}
+
+.facebook-color {
+    color: #129DEC;
+}
+
+
+
+footer {
+    background-color: #333333;
+    color: #FBFBFB;
+}
+
+.copyright {
+    background-color: #242424;
+}
+.footer-media svg {
+    height: 50px;
+}
+
+.pure-color {
+    color: #FBFBFB;
+}
+
