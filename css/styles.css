@@ -31,7 +31,7 @@ body {
     .text-center {
       text-align: left !important; /* Zmiana na text-align-left */
     }
-    .align-items-center {
+    .align-items-center-zmiana {
         align-items: start !important;
     }
     .vanish {
@@ -233,4 +233,26 @@ footer {
 
 .search-bar-container:focus-within {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.recipe-preview {
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    max-height: 280px;
+}
+
+.recipe-preview-list {
+    row-gap: 50px;
+}
+
+
+.recipe-preview-img {
+    height: 100%;
+}
+
+.recipe-preview-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
