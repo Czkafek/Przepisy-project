@@ -43,7 +43,7 @@ h6 {
     text-decoration: none;
 }
 .main-padding {
-    padding-top: 120px !important;
+    padding-top: 60px !important;
 }
 .recipe-container {
 
@@ -60,6 +60,16 @@ h6 {
     height: 100%;
     object-fit: cover;
 }
+.align-items-end-zmiana {
+    align-items: center;
+}
+.space {
+    height: 120px;
+}
+.space-2 {
+    height: 60px;
+}
+
 
 @media (max-width: 576px) {
     body {
@@ -115,6 +125,12 @@ h6 {
     h6 {
         font-size: 1.3rem;
     }
+    .welcome-img {
+        width: 500px !important;
+    }
+    .space-2 {
+        height: 30px;
+    }
 }
 @media (min-width: 769px) {
     .nav-item {
@@ -130,6 +146,11 @@ h6 {
 @media (max-width: 992px) and (min-width: 770px) {
     h6 {
         font-size: 2rem;
+    }
+}
+@media (min-width: 1200px) {
+    .align-items-end-zmiana {
+        align-items: end;
     }
 }
 
@@ -298,7 +319,7 @@ footer {
 }
 
 .recipe-preview-list {
-    row-gap: 50px;
+    row-gap: 30px;
 }
 
 
