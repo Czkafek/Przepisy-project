@@ -16,14 +16,28 @@
         $sql = "SELECT COUNT(*) FROM recipes_ingredients WHERE recipe_id = $variable;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        $amount = $row['COUNT(*)'];
+        $ingredients_amount = $row['COUNT(*)'];
 
         $sql = "SELECT MIN(id) FROM recipes_ingredients WHERE recipe_id = $variable;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        $min = $row['MIN(id)']; 
+        $ingredients_min = $row['MIN(id)']; 
 
-        $ingredient_iteration_end = $min + $amount;
+        $ingredient_iteration_end = $ingredients_min + $ingredients_amount;
+
+
+        $sql = "SELECT COUNT(*) FROM preparation_steps WHERE recipe_id = $variable;";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $steps_amount = $row['COUNT(*)'];
+
+        $sql = "SELECT MIN(id) FROM preparation_steps WHERE recipe_id = $variable;";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $steps_min = $row['MIN(id)'];
+
+        $step_id = $steps_min;
+
 
         $sql = "SELECT title FROM recipes WHERE id = $variable;";
         $result = $conn->query($sql);
@@ -92,7 +106,7 @@
                         <h6 class="fs-3 fw-bold ">Składniki</h6>
                         <?php
 
-                            for($i=$min; $i<$ingredient_iteration_end; $i++) {
+                            for($i=$ingredients_min; $i<$ingredient_iteration_end; $i++) {
 
                                 $sql = "SELECT ingredient_id FROM recipes_ingredients WHERE id = $i;";
                                 $result = $conn->query($sql);
@@ -118,34 +132,21 @@
                     </div>
                     <div class="col-lg pe-0 pt-lg-0 pt-3">
                         <h6 class="fs-4 fw-bold mb-4">Przygotowanie krok po kroku</h6>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 1</p>
-                            <p class="fs-5 fw-normal">Skrój kurczaka w kostkę, wymieszaj z dwoma łyżkami ciemnego sosu sojowego, Przyprawą w mini kostkach Knorr i marynuj przez godzinę.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 2</p>
-                            <p class="fs-5 fw-normal">Mocz grzyby w gorącej wodzie przez kwadrans, a następnie wrzuć je do gotującej się wody i gotuj je przez kolejny kwadrans. Kiedy ostygną skrój je w paski.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 3</p>
-                            <p class="fs-5 fw-normal">Marchew pokrój w zapałki, por w kostkę, a paprykę i kapustę w paski.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 4</p>
-                            <p class="fs-5 fw-normal">Wrzuć mięso na mocno rozgrzany w woku olej (2 łyżki) i smaż je, aż puści sok, a następnie przełóż je razem z sosem własnym do innego naczynia.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 5</p>
-                            <p class="fs-5 fw-normal">Rozgrzej w woku pięć łyżek oleju. Po chwili dodaj posiekany czosnek, paprykę i marchew. Smaż wszystko dwie minuty i dodaj por. Po kolejnych trzech minutach smażenia wrzuć grzyby mun. Smaż jeszcze trzy minuty.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 6</p>
-                            <p class="fs-5 fw-normal">Teraz dodaj kiełki, kapustkę pekińską i mięso. Smaż 4 minuty i dodaj siekane chili.</p>
-                        </div>
-                        <div class="row ps-3 pb-5">
-                            <p class="fs-4 fw-bold mb-2">Krok 7</p>
-                            <p class="fs-5 fw-normal">Makaron ugotuj według wskazówek na opakowaniu. Następnie odcedź go i dodaj do wszystkich składników w woku. Dopraw miodem, wszystko energicznie wymieszaj i podawaj posypane kiełkami.</p>
-                        </div>
+                        <?php
+
+                            for($i=1; $i<=$steps_amount; $i++) {
+
+                                $sql = "SELECT instruction FROM preparation_steps WHERE id = $step_id;";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $instruction = $row["instruction"];
+
+                                $step_id++;
+
+                                echo "<div class='row ps-3 pb-5'><p class='fs-4 fw-bold mb-2'>Krok " . $i . "</p> <p class='fs-5 fw-normal'>" . $instruction . "</p></div>";
+                            }
+
+                        ?>
                     </div>
                 </div>
             </div>
