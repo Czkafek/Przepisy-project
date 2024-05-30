@@ -12,18 +12,31 @@
         include("database.php");
         session_start();
         $variable = $_SESSION['variable'];
-        $sql_title = "SELECT title FROM recipes WHERE id = $variable;";
-        $result = $conn->query($sql_title);
+
+        $sql = "SELECT COUNT(*) FROM recipes_ingredients WHERE recipe_id = $variable;";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $amount = $row['COUNT(*)'];
+
+        $sql = "SELECT MIN(id) FROM recipes_ingredients WHERE recipe_id = $variable;";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $min = $row['MIN(id)']; 
+
+        $ingredient_iteration_end = $min + $amount;
+
+        $sql = "SELECT title FROM recipes WHERE id = $variable;";
+        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $title = $row["title"];
 
-        $sql_time = "SELECT time FROM recipes WHERE id = $variable;";
-        $result = $conn->query($sql_time);
+        $sql = "SELECT time FROM recipes WHERE id = $variable;";
+        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $time = $row["time"];
 
-        $sql_difficulty = "SELECT difficulty FROM recipes WHERE id = $variable;";
-        $result = $conn->query($sql_difficulty);
+        $sql = "SELECT difficulty FROM recipes WHERE id = $variable;";
+        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $difficulty = $row["difficulty"];
 
@@ -77,58 +90,31 @@
                             </div>
                         </div>
                         <h6 class="fs-3 fw-bold ">Składniki</h6>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">pierś z kurczaka</p>
-                            <p class="fs-5 text-nowrap ps-4">1 sztuka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">Przyprawa w Mini kostkach Smażona cebula Knorr</p>
-                            <p class="fs-5 text-nowrap ps-4">2 sztuki</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">chiński makaron jajeczny</p>
-                            <p class="fs-5 text-nowrap ps-4">200 gramów</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">czerwona papryka</p>
-                            <p class="fs-5 text-nowrap ps-4">1 sztuka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">ząbki czonsku</p>
-                            <p class="fs-5 text-nowrap ps-4">4 sztuki</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">papryczka chili</p>
-                            <p class="fs-5 text-nowrap ps-4">1 sztuka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">marchew</p>
-                            <p class="fs-5 text-nowrap ps-4">1 sztuka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">por</p>
-                            <p class="fs-5 text-nowrap ps-4">1 sztuka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">suszone grzyby mun</p>
-                            <p class="fs-5 text-nowrap ps-4">2 łyżki</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">liść kapusty pekińskiej</p>
-                            <p class="fs-5 text-nowrap ps-4">5 sztuk</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">kiełki fasoli mung</p>
-                            <p class="fs-5 text-nowrap ps-4">1 opakowanie</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">sos sojowy</p>
-                            <p class="fs-5 text-nowrap ps-4">1 łyżeczka</p>
-                        </div>
-                        <div class="ps-1 d-flex justify-content-between">
-                            <p class="fs-5">miód</p>
-                            <p class="fs-5 text-nowrap ps-4">3 łyżeczki</p>
-                        </div>
+                        <?php
+
+                            for($i=$min; $i<$ingredient_iteration_end; $i++) {
+
+                                $sql = "SELECT ingredient_id FROM recipes_ingredients WHERE id = $i;";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $ingredient_id = $row["ingredient_id"];
+                                
+                                $sql = "SELECT name FROM ingredients WHERE id = $ingredient_id;";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $ingredient_name = $row["name"];
+
+                                $sql = "SELECT amount FROM recipes_ingredients WHERE id = $i;";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                $ingredient_amount = $row["amount"];
+
+
+                                echo "<div class='ps-1 d-flex justify-content-between'><p class='fs-5'>" . $ingredient_name . "</p><p class='fs-5 text-nowrap ps-4'>" . $ingredient_amount . "</p> </div>";
+                            }   
+
+                        ?>
+                        
                     </div>
                     <div class="col-lg pe-0 pt-lg-0 pt-3">
                         <h6 class="fs-4 fw-bold mb-4">Przygotowanie krok po kroku</h6>

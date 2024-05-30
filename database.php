@@ -10,12 +10,11 @@
 
 
     $sql = "SELECT COUNT(*) FROM recipes_ingredients WHERE recipe_id = 1;";
-
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    $temp = $row['COUNT(*)'];
+    $amount = $row['COUNT(*)'];
 
-    echo $temp;
+    echo $amount;
     // wyświetla 18 (jest to poprawny wynik)
 
 
