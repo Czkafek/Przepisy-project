@@ -27,7 +27,26 @@
 
     <main>
 
-        <img src="img\makaron-smazony-z-kurczakiem-i-warzywami.jpg" alt="image">
+        <?php
+            include("database.php");
+
+            session_start();
+            $_SESSION['variable'] = 2;
+            $recipe_id = $_SESSION['variable'];
+
+            $sql = "SELECT image FROM recipes WHERE id = $recipe_id;";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            $image_src_part = $row['image'];
+            $image_src = "img/" . $image_src_part;
+
+    
+            mysqli_close($conn);
+        ?>
+
+        <?php
+            echo "<img src='" . $image_src . "'>";
+        ?>
 
     </main>
 

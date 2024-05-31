@@ -13,9 +13,8 @@
         include("database.php");
 
         session_start();
-        $_SESSION['variable'] = 2;
+        $_SESSION['variable'] = 1;
 
-        mysqli_close($conn);
     ?>
     
     <nav class="row navbar bg-body-tertiary p-1 fixed-top">
@@ -37,16 +36,45 @@
     <main class="container-fluid p-0 m-0 px-4">
         
         <div class="row pt-5 mt-5 d-flex justify-content-center p-0">
-            <form class="input-group d-flex justify-content-start search-bar-container">
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-                <input class="border-0 fs-5 search-bar" type="search" placeholder="Search" aria-label="Search">
+            <form class="input-group d-flex justify-content-start search-bar-container" action="lista-przepisow.php" method="post" name="search">
+                <button class="border-0 bg-transparent" type="submit">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+                <input class="border-0 fs-5 search-bar" type="search" placeholder="Search" aria-label="Search" name="search_content">
             </form>
         </div>
+        <?php
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $search_content = $_POST["search_content"];
+
+                $stmt = $conn->prepare("SELECT id FROM recipes WHERE title LIKE ?");
+                $search_param = "%" . $search_content . "%";
+                $stmt->bind_param("s", $search_param);
+
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $search_result_unsorted = array();
+
+                    while ($row = $result->fetch_assoc()) {
+                        $search_result_unsorted[] = $row['id'];
+                    }
+
+                    echo implode(", ", $search_result_unsorted);
+                } else {
+                    echo "Brak wyników.";
+                }
+
+                $stmt->close();
+            }
+        ?>
 
         <div class="row d-flex flex-column align-items-center recipe-preview-list pt-4">
-            <a class="row recipe-preview p-0 rounded-5 d-flex recipe-preview" href="przepis.html">
+            <a class="row recipe-preview p-0 rounded-5 d-flex recipe-preview" href="przepis.php">
                 <div class="col-sm-4 col-4 p-0 recipe-preview-img">
                     <img src="img/makaron-smazony-z-kurczakiem-i-warzywami.jpg" alt="banner" class="rounded-start-5">
                 </div>
@@ -65,7 +93,7 @@
                         </div>
                         <div class="col d-flex flex-row-zmiana align-items-center">
                             <div class="row pe-sm-4 pe-0">
-                                <img src="img/medium.png" id="difficulty">
+                                <img src="img/Średnie.png" id="difficulty">
                             </div>
                             <h5 class="row fw-normal fs-5">średnie</h5>
                         </div>
@@ -439,6 +467,9 @@
         </div>
 
     </main>
+    <?php
+        mysqli_close($conn);
+    ?>
 
     <footer class="pt-5">
         <div class="container footer-media d-flex justify-content-center pb-5">

@@ -11,14 +11,14 @@
     <?php
         include("database.php");
         session_start();
-        $variable = $_SESSION['variable'];
+        $recipe_id = $_SESSION['variable'];
 
-        $sql = "SELECT COUNT(*) FROM recipes_ingredients WHERE recipe_id = $variable;";
+        $sql = "SELECT COUNT(*) FROM recipes_ingredients WHERE recipe_id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $ingredients_amount = $row['COUNT(*)'];
 
-        $sql = "SELECT MIN(id) FROM recipes_ingredients WHERE recipe_id = $variable;";
+        $sql = "SELECT MIN(id) FROM recipes_ingredients WHERE recipe_id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $ingredients_min = $row['MIN(id)']; 
@@ -26,12 +26,12 @@
         $ingredient_iteration_end = $ingredients_min + $ingredients_amount;
 
 
-        $sql = "SELECT COUNT(*) FROM preparation_steps WHERE recipe_id = $variable;";
+        $sql = "SELECT COUNT(*) FROM preparation_steps WHERE recipe_id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $steps_amount = $row['COUNT(*)'];
 
-        $sql = "SELECT MIN(id) FROM preparation_steps WHERE recipe_id = $variable;";
+        $sql = "SELECT MIN(id) FROM preparation_steps WHERE recipe_id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $steps_min = $row['MIN(id)'];
@@ -39,20 +39,26 @@
         $step_id = $steps_min;
 
 
-        $sql = "SELECT title FROM recipes WHERE id = $variable;";
+        $sql = "SELECT title FROM recipes WHERE id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $title = $row["title"];
 
-        $sql = "SELECT time FROM recipes WHERE id = $variable;";
+        $sql = "SELECT time FROM recipes WHERE id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $time = $row["time"];
 
-        $sql = "SELECT difficulty FROM recipes WHERE id = $variable;";
+        $sql = "SELECT difficulty FROM recipes WHERE id = $recipe_id;";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $difficulty = $row["difficulty"];
+
+        $sql = "SELECT image FROM recipes WHERE id = $recipe_id;";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $image_src_part = $row['image'];
+        $image_src = "img/" . $image_src_part;
 
     ?>
     
@@ -66,7 +72,7 @@
                   <a class="nav-link" aria-current="page" href="index.html">Strona główna</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="lista-przepisow.html">Przepisy</a>
+                  <a class="nav-link active" href="lista-przepisow.php">Przepisy</a>
                 </li>
             </ul>
         </div>
@@ -81,7 +87,9 @@
                 </div>
                 <div class="row d-flex justify-content-center pt-3">
                     <div class="recipe-img">
-                        <img src="img/makaron-smazony-z-kurczakiem-i-warzywami.jpg">
+                    <?php
+                        echo "<img src='" . $image_src . "'>";
+                    ?>
                     </div>
                 </div>
                 <div class="row w-100 column-gap pt-sm-4 pt-3">
@@ -98,7 +106,11 @@
                             </div>
                             <div class="col-md-6 col-lg col  d-flex flex-row align-items-center">
                                 <div class="row pe-sm-4 pe-3">
-                                    <img src="img/medium.png" id="difficulty">
+                                    <?php
+                                        $difficulty_image_src = "img/" . $difficulty . ".png";
+
+                                        echo "<img src='". $difficulty_image_src ."' id='difficulty'>";
+                                    ?>
                                 </div>
                                 <h5 class="row fw-normal h7 m-0"><?php echo $difficulty ?></h5>
                             </div>

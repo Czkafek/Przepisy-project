@@ -14,7 +14,6 @@
     $row = $result->fetch_assoc();
     $amount = $row['COUNT(*)'];
 
-    echo $amount;
     // wyświetla 18 (jest to poprawny wynik)
 
 
